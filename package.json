@@ -9,7 +9,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "electron-prebuilt": "^1.2.3",
+    "fs-extra": "^0.30.0",
     "gulp": "^3.9.1",
-    "electron-prebuilt": "^1.2.3"
+    "readdirp": "^2.0.0",
+    "should": "^9.0.2"
+  },
+  "dependencies": {
+    "node-uuid": "^1.4.7",
+    "sorted": "^0.1.1"
   }
 }

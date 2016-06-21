@@ -8,72 +8,12 @@
       body {
         margin: 0 0;
       }
-
-      #control {
-        position: fixed;
-
-        top: 0;
-        left: 0;
-        right: 0;
-
-        height: 40px;
-
-        background-color: darkred;
-      }
-
-      #editor {
-        position: fixed;
-        top: 40px;
-        bottom: 0px;
-        left: 0px;
-
-        width: 60vw;
-      }
-
-      #logs {
-        position: fixed;
-
-        top: 40px;
-        bottom: 0px;
-        left: 60vw;
-        right: 0px;
-
-        background-color: #efefef;
-
-        overflow: auto;
-
-        padding: 40px 40px;
-      }
-
-      #logs > pre {
-        /* copied from github */
-        font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
-      }
-
     </style>
   </head>
   <body>
 
-    <div id="control">
-      <select id="file">
-        <option value="index.html">index.html</option>
-        <option value="index.css" selected>index.css</option>
-        <option value="index.js">index.js</option>
-      </select>
-    </div>
+    <div id="tree-container"></div>
 
-    <div id="editor"></div>
-    <div id="logs"></div>
-
-    <!-- dependencies -->
-    <script src="../bower_components/ace-builds/src-noconflict/ace.js"></script>
-    <script src="../bower_components/ace-builds/src-noconflict/ext-language_tools.js"></script>
-    <script src="../bower_components/ace-builds/src-noconflict/ext-emmet.js"></script>
-    <script src="../bower_components/ace-emmet-core/emmet.js"></script>
-    <!-- dependencies -->
-
-    <!-- for demo purposes -->
-    <script src="../bower_components/Keypress/keypress.js"></script>
     <script src="./demo.js"></script>
   </body>
 
