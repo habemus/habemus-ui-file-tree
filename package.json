@@ -16,6 +16,7 @@
     "should": "^9.0.2"
   },
   "dependencies": {
+    "mustache": "^2.2.1",
     "node-uuid": "^1.4.7",
     "sorted-array": "^2.0.1"
   }

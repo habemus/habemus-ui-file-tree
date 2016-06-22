@@ -13,11 +13,11 @@ describe('Branch', function () {
     var branch1 = root.addBranch('branch1');
     var branch2 = root.addBranch('branch2');
 
-    root.getChildNodeIndex(leaf1).should.equal(4);
-    root.getChildNodeIndex(branch3).should.equal(3);
-    root.getChildNodeIndex(branch0).should.equal(0);
-    root.getChildNodeIndex(branch1).should.equal(1);
-    root.getChildNodeIndex(branch2).should.equal(2);
+    root.childNodes.indexOf(leaf1).should.equal(4);
+    root.childNodes.indexOf(branch3).should.equal(3);
+    root.childNodes.indexOf(branch0).should.equal(0);
+    root.childNodes.indexOf(branch1).should.equal(1);
+    root.childNodes.indexOf(branch2).should.equal(2);
   });
 
   it('absolutePath should return the path from the root', function () {
@@ -54,9 +54,10 @@ describe('Branch', function () {
 
     var rootNodeAddedEventCount = 0;
 
-    root.on('node-added', function (data) {
-      data.index.should.be.instanceof(Number);
-      data.node.should.be.instanceof(Branch.prototype.BranchConstructor);
+    root.on('node-added', function (parentNode, node, index) {
+      parentNode.should.be.instanceof(Branch.prototype.BranchConstructor);
+      node.should.be.instanceof(Branch.prototype.BranchConstructor);
+      index.should.be.instanceof(Number);
 
       rootNodeAddedEventCount += 1;
 
@@ -75,9 +76,10 @@ describe('Branch', function () {
 
     var rootNodeAddedEventCount = 0;
 
-    root.on('node-added', function (data) {
-      data.index.should.be.instanceof(Number);
-      data.node.should.be.instanceof(Branch.prototype.BranchConstructor);
+    root.on('node-added', function (parentNode, node, index) {
+      parentNode.should.be.instanceof(Branch.prototype.BranchConstructor);
+      node.should.be.instanceof(Branch.prototype.BranchConstructor);
+      index.should.be.instanceof(Number);
 
       rootNodeAddedEventCount += 1;
 
