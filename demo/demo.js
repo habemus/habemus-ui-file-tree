@@ -8,22 +8,20 @@ const fse      = require('fs-extra');
 const readdirp = require('readdirp');
 
 const Branch = require('../lib/model/branch');
+const HappinessTree = require('../lib/ui');
 
-
-function Directory(name, data, parent) {
+function DirectoryConstructor(name, data, parent) {
   Branch.call(this, name, data, parent);
 }
 
-util.inherits(Directory, Branch);
+util.inherits(DirectoryConstructor, Branch);
 
-Directory.prototype.BranchConstructor = Directory;
+DirectoryConstructor.prototype.BranchConstructor = DirectoryConstructor;
 
-Directory.prototype.open = function () {
+DirectoryConstructor.prototype.loadChildNodes = function () {
 
   var self    = this;
   var dirpath = self.absolutePath;
-
-  console.log(dirpath);
 
   fs.readdir(dirpath, function (err, contents) {
 
@@ -41,9 +39,19 @@ Directory.prototype.open = function () {
   });
 }
 
-var rootDir = window.rootDir = new Directory(__dirname + '/files');
+var treeModel = new DirectoryConstructor(__dirname + '/files');
+var tree = new HappinessTree(treeModel);
 
-rootDir.on('node-added', function (data) {
-  console.log('node-added');
-  console.log(data);
-});
+tree.attach(document.querySelector('#root'));
+
+// loadChildNodes some stuff
+treeModel.loadChildNodes();
+setTimeout(function () {
+
+  treeModel._childNodes.array[0].loadChildNodes();
+
+  setTimeout(function () {
+    treeModel._childNodes.array[0]._childNodes.array[0].loadChildNodes();
+  }, 100);
+
+}, 100);

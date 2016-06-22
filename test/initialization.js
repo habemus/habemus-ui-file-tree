@@ -4,12 +4,8 @@ const Branch = require('../lib/model/branch');
 
 describe('Branch', function () {
 
-
   it('sorting should make branches come before leaves', function () {
-
-    var ROOT_NAME = 'root';
-
-    var root = new Branch(ROOT_NAME);
+    var root = new Branch('root');
     // firt add leaf
     var leaf1   = root.addLeaf('leaf1');
     var branch3 = root.addBranch('branch3');
