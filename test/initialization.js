@@ -4,6 +4,26 @@ const Branch = require('../lib/model/branch');
 
 describe('Branch', function () {
 
+
+  it('sorting should make branches come before leaves', function () {
+
+    var ROOT_NAME = 'root';
+
+    var root = new Branch(ROOT_NAME);
+    // firt add leaf
+    var leaf1   = root.addLeaf('leaf1');
+    var branch3 = root.addBranch('branch3');
+    var branch0 = root.addBranch('branch0');
+    var branch1 = root.addBranch('branch1');
+    var branch2 = root.addBranch('branch2');
+
+    root.getChildNodeIndex(leaf1).should.equal(4);
+    root.getChildNodeIndex(branch3).should.equal(3);
+    root.getChildNodeIndex(branch0).should.equal(0);
+    root.getChildNodeIndex(branch1).should.equal(1);
+    root.getChildNodeIndex(branch2).should.equal(2);
+  });
+
   it('absolutePath should return the path from the root', function () {
 
     var ROOT_NAME = 'root-path/to-some/root';

@@ -11,8 +11,6 @@ const Branch = require('../lib/model/branch');
 
 
 function Directory(name, data, parent) {
-
-  console.log(arguments);
   Branch.call(this, name, data, parent);
 }
 
@@ -23,7 +21,7 @@ Directory.prototype.BranchConstructor = Directory;
 Directory.prototype.open = function () {
 
   var self    = this;
-  var dirpath = self.getAbsolutePath();
+  var dirpath = self.absolutePath;
 
   console.log(dirpath);
 
