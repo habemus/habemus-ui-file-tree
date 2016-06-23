@@ -2,10 +2,12 @@ const should = require('should');
 
 const Branch = require('../lib/model/branch');
 
-describe('Branch', function () {
+describe('Branch#addBranch(name, data)', function () {
 
   it('sorting should make branches come before leaves', function () {
-    var root = new Branch('root');
+    var root = new Branch({
+      rootPath: '/some-path'
+    });
     // firt add leaf
     var leaf1   = root.addLeaf('leaf1');
     var branch3 = root.addBranch('branch3');
@@ -20,37 +22,55 @@ describe('Branch', function () {
     root.childNodes.indexOf(branch2).should.equal(2);
   });
 
-  it('absolutePath should return the path from the root', function () {
-
-    var ROOT_NAME = 'root-path/to-some/root';
-
-    var root = new Branch(ROOT_NAME);
+  it('path should return the path from the root', function () {
+    var root = new Branch({
+      rootPath: '/some-path'
+    });
     var branch1 = root.addBranch('branch1');
     var branch2 = root.addBranch('branch2');
     var branch11 = branch1.addBranch('branch11');
 
-    root.absolutePath.should.equal(ROOT_NAME);
-    branch1.absolutePath.should.equal(ROOT_NAME + '/branch1');
-    branch2.absolutePath.should.equal(ROOT_NAME + '/branch2');
-    branch11.absolutePath.should.equal(ROOT_NAME + '/branch1/branch11');
+    root.path.should.equal('');
+    branch1.path.should.equal('/branch1');
+    branch2.path.should.equal('/branch2');
+    branch11.path.should.equal('/branch1/branch11');
   });
 
-  it('absolutePath should give root \'\' value if no name is given ', function () {
+  it('path should give root \'\' value if no name is given ', function () {
 
-    var root = new Branch();
+    var root = new Branch({
+      rootPath: '/some-path',
+    });
     var branch1 = root.addBranch('branch1');
     var branch2 = root.addBranch('branch2');
     var branch11 = branch1.addBranch('branch11');
 
-    root.absolutePath.should.equal('');
-    branch1.absolutePath.should.equal('/branch1');
-    branch2.absolutePath.should.equal('/branch2');
-    branch11.absolutePath.should.equal('/branch1/branch11');
+    root.path.should.equal('');
+    branch1.path.should.equal('/branch1');
+    branch2.path.should.equal('/branch2');
+    branch11.path.should.equal('/branch1/branch11');
+  });
+
+  it('path should give root \'\' value if no name is given ', function () {
+
+    var root = new Branch({
+      rootPath: '/some-path'
+    });
+    var branch1 = root.addBranch('branch1');
+    var branch2 = root.addBranch('branch2');
+    var branch11 = branch1.addBranch('branch11');
+
+    root.path.should.equal('');
+    branch1.path.should.equal('/branch1');
+    branch2.path.should.equal('/branch2');
+    branch11.path.should.equal('/branch1/branch11');
   });
 
   it('should emit `node-added` events when branches are added', function (done) {
 
-    var root = new Branch('');
+    var root = new Branch({
+      rootPath: '/some-path',
+    });
 
     var rootNodeAddedEventCount = 0;
 
@@ -72,7 +92,9 @@ describe('Branch', function () {
 
   it('should emit `node-added` events when branches are added to sub branches', function (done) {
 
-    var root = new Branch('');
+    var root = new Branch({
+      rootPath: '/some-path'
+    });
 
     var rootNodeAddedEventCount = 0;
 

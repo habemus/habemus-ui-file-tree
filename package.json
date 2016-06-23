@@ -12,6 +12,8 @@
     "electron-prebuilt": "^1.2.3",
     "fs-extra": "^0.30.0",
     "gulp": "^3.9.1",
+    "gulp-istanbul": "^1.0.0",
+    "gulp-mocha": "^2.2.0",
     "readdirp": "^2.0.0",
     "should": "^9.0.2"
   },
