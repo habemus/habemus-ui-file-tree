@@ -22,6 +22,44 @@ describe('new Node', function () {
     }, TypeError);
   });
 
+  it('attempting to manually set `path` property should throw an error', function () {
+    var root = new Node({
+      type: 'root',
+      rootPath: 'some-path'
+    });
+
+    var leaf = new Node({
+      type: 'leaf',
+      name: 'some-leaf',
+      parent: root
+    });
+
+    assert.throws(function () {
+      leaf.path = 'fake-path';
+    });
+
+    leaf.path.should.equal('/some-leaf');
+  });
+
+  it('attempting to manually set `absolutePath` property should throw an error', function () {
+    var root = new Node({
+      type: 'root',
+      rootPath: 'some-path'
+    });
+
+    var leaf = new Node({
+      type: 'leaf',
+      name: 'some-leaf',
+      parent: root
+    });
+
+    assert.throws(function () {
+      leaf.absolutePath = 'fake-path';
+    });
+
+    leaf.absolutePath.should.equal('some-path/some-leaf');
+  });
+
   describe('type: root', function () {
 
     it('should require rootPath', function () {
