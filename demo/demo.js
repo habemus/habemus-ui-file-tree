@@ -16,7 +16,7 @@ var _readdir = Bluebird.promisify(fs.readdir);
 var _lstat   = Bluebird.promisify(fs.lstat);
 
 // constants
-const FS_ROOT_PATH = __dirname + '/files';
+const FS_ROOT_PATH = path.join(__dirname, '../node_modules');
 
 function wait(ms) {
   return new Bluebird((resolve, reject) => {
@@ -49,6 +49,22 @@ const hfs = {
             });
         }));
       });
+  },
+
+  remove: function (p) {
+    p = path.join(FS_ROOT_PATH, p);
+
+    console.log('remove ', p);
+
+    return wait(500);
+  },
+
+  writeFile: function (p, contents) {
+    p = path.join(FS_ROOT_PATH, p);
+
+    console.log('create file ', p, ' with contents ', contents);
+
+    return wait(300);
   }
 };
 

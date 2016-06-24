@@ -6,13 +6,23 @@
 
     <link rel="stylesheet" type="text/css" href="../lib/ui/styles.css">
 
+    <!-- jquery context menu -->
+    <link rel="stylesheet" type="text/css" href="../bower_components/jQuery-contextMenu/dist/jQuery.contextMenu.css">
+
     <style type="text/css">
       body {
         margin: 0 0;
+
+        font-family: sans-serif;
       }
     </style>
   </head>
   <body>
+
+    <script type="text/javascript">
+      window.$ = window.jQuery = require('../bower_components/jquery/dist/jquery.js');
+    </script>
+    <script src="../bower_components/jQuery-contextMenu/dist/jquery.contextMenu.js"></script>
     <script src="./demo.js"></script>
   </body>
 

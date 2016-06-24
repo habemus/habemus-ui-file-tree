@@ -1,0 +1,22 @@
+{
+  "name": "happiness-tree",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Simon <simonxd@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/habemus/happiness-tree",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.0.0",
+    "jQuery-contextMenu": "^2.2.0"
+  }
+}

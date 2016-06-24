@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "bluebird": "^3.4.1",
+    "jquery": "^3.0.0",
+    "jquery-contextmenu": "^2.2.0",
     "mustache": "^2.2.1",
     "node-uuid": "^1.4.7",
     "sorted-array": "^2.0.1"

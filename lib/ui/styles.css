@@ -1,13 +1,46 @@
-ul, li {
+/* Prevent the text contents of draggable elements from being selectable. */
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+
+.ht-branch ul {
   list-style: none;
+  padding: 0 0;
+
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 
+li.ht-branch, li.ht-leaf {
+  list-style: none;
+  padding: 0 0;
+
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+
+/* branch */
 .ht-branch {
-  border: 3px dashed red;
+  -webkit-user-select: none;
 }
 
-.ht-branch .ht-branch-label {
-  text-decoration: underline;
+.ht-branch-label {
+  border-bottom: 1px solid gray;
+}
+
+.ht-branch-label:hover {
+  cursor: pointer;
 }
 
 .ht-branch.ht-collapsed [data-role="branch-child-container"] {
@@ -17,3 +50,23 @@ ul, li {
 .ht-branch.ht-loading [data-role="branch-label"] {
   background-color: rgba(255, 255, 0, 0.2);
 }
+/* branch */
+
+
+/* leaf */
+.ht-leaf {
+  -webkit-user-select: none;
+}
+
+.ht-leaf-label {
+  border-bottom: 1px dashed gray;
+}
+
+.ht-dragging > .ht-leaf-label {
+  background-color: skyblue;
+}
+
+.ht-leaf-label:hover {
+  cursor: pointer;
+}
+/* leaf */
