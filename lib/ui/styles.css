@@ -1,0 +1,19 @@
+ul, li {
+  list-style: none;
+}
+
+.ht-branch {
+  border: 3px dashed red;
+}
+
+.ht-branch .ht-branch-label {
+  text-decoration: underline;
+}
+
+.ht-branch.ht-collapsed [data-role="branch-child-container"] {
+  display: none;
+}
+
+.ht-branch.ht-loading [data-role="branch-label"] {
+  background-color: rgba(255, 255, 0, 0.2);
+}

@@ -22,44 +22,6 @@ describe('new Node', function () {
     }, TypeError);
   });
 
-  it('attempting to manually set `path` property should throw an error', function () {
-    var root = new Node({
-      type: 'root',
-      rootPath: 'some-path'
-    });
-
-    var leaf = new Node({
-      type: 'leaf',
-      name: 'some-leaf',
-      parent: root
-    });
-
-    assert.throws(function () {
-      leaf.path = 'fake-path';
-    });
-
-    leaf.path.should.equal('/some-leaf');
-  });
-
-  it('attempting to manually set `absolutePath` property should throw an error', function () {
-    var root = new Node({
-      type: 'root',
-      rootPath: 'some-path'
-    });
-
-    var leaf = new Node({
-      type: 'leaf',
-      name: 'some-leaf',
-      parent: root
-    });
-
-    assert.throws(function () {
-      leaf.absolutePath = 'fake-path';
-    });
-
-    leaf.absolutePath.should.equal('some-path/some-leaf');
-  });
-
   describe('type: root', function () {
 
     it('should require rootPath', function () {
@@ -240,6 +202,26 @@ describe('Node#set(data), Node#set(key, value), Node#get(key)', function () {
 });
 
 describe('Node#path', function () {
+
+  it('attempting to manually set `path` property should throw an error', function () {
+    var root = new Node({
+      type: 'root',
+      rootPath: 'some-path'
+    });
+
+    var leaf = new Node({
+      type: 'leaf',
+      name: 'some-leaf',
+      parent: root
+    });
+
+    assert.throws(function () {
+      leaf.path = 'fake-path';
+    });
+
+    leaf.path.should.equal('/some-leaf');
+  });
+
   it('should return the path relative to the root node', function () {
 
     var root = new Node({
@@ -274,6 +256,25 @@ describe('Node#path', function () {
 
 describe('Node#absolutePath', function () {
 
+  it('attempting to manually set `absolutePath` property should throw an error', function () {
+    var root = new Node({
+      type: 'root',
+      rootPath: 'some-path'
+    });
+
+    var leaf = new Node({
+      type: 'leaf',
+      name: 'some-leaf',
+      parent: root
+    });
+
+    assert.throws(function () {
+      leaf.absolutePath = 'fake-path';
+    });
+
+    leaf.absolutePath.should.equal('some-path/some-leaf');
+  });
+
   it('should return the absolutePath including the root node\'s rootPath', function () {
 
     var root = new Node({
@@ -303,5 +304,57 @@ describe('Node#absolutePath', function () {
     branch0.absolutePath.should.equal('root-path/branch0');
     branch1.absolutePath.should.equal('root-path/branch1');
     branch11.absolutePath.should.equal('root-path/branch1/branch11');
+  });
+});
+
+describe('Node#root', function () {
+
+  it('attempting to manually set `root` property should throw an error', function () {
+    var root = new Node({
+      type: 'root',
+      rootPath: 'some-path'
+    });
+
+    var leaf = new Node({
+      type: 'leaf',
+      name: 'some-leaf',
+      parent: root
+    });
+
+    assert.throws(function () {
+      leaf.root = { fake: 'root-node' };
+    });
+
+    leaf.root.should.equal(root);
+  });
+
+  it('should return the root node', function () {
+
+    var root = new Node({
+      type: 'root',
+      rootPath: 'root-path',
+    });
+
+    var branch0 = new Node({
+      type: 'branch',
+      name: 'branch0',
+      parent: root,
+    });
+
+    var branch1 = new Node({
+      type: 'branch',
+      name: 'branch1',
+      parent: root
+    });
+
+    var branch11 = new Node({
+      type: 'branch',
+      name: 'branch11',
+      parent: branch1
+    });
+
+    branch0.root.should.equal(root);
+    branch1.root.should.equal(root);
+    branch11.root.should.equal(root);
   });
 });
