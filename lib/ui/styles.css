@@ -1,4 +1,4 @@
-/* Prevent the text contents of draggable elements from being selectable. */
+ Prevent the text contents of draggable elements from being selectable. */
 [draggable] {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -37,10 +37,14 @@ li.ht-branch, li.ht-leaf {
 
 .ht-branch-label {
   border-bottom: 1px solid gray;
+
+  /* make the branch collapse */
+  display: inline-block;
 }
 
 .ht-branch-label:hover {
   cursor: pointer;
+  background-color: lightgray;
 }
 
 .ht-branch.ht-collapsed [data-role="branch-child-container"] {
@@ -50,6 +54,26 @@ li.ht-branch, li.ht-leaf {
 .ht-branch.ht-loading [data-role="branch-label"] {
   background-color: rgba(255, 255, 0, 0.2);
 }
+
+/* dragging behavior */
+
+/* dragging behavior */
+.ht-branch.ht-dragging > [data-role="branch-label"] {
+  background-color: darkred;
+  opacity: 0.8;
+  color: white;
+}
+
+.ht-branch.ht-dragover > [data-role="branch-label"] {
+  background-color: black;
+  color: white;
+}
+
+.ht-branch.ht-dragover > [data-role="branch-child-container"] {
+  background-color: black;
+  color: white;
+}
+
 /* branch */
 
 
@@ -62,11 +86,15 @@ li.ht-branch, li.ht-leaf {
   border-bottom: 1px dashed gray;
 }
 
-.ht-dragging > .ht-leaf-label {
-  background-color: skyblue;
-}
-
 .ht-leaf-label:hover {
   cursor: pointer;
+  background-color: lightgray;
 }
-/* leaf */
+
+/* dragging behavior */
+.ht-leaf.ht-dragging .ht-leaf-label {
+  background-color: darkred;
+  opacity: 0.8;
+  color: white;
+}
+/* leaf 

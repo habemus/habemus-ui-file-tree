@@ -74,7 +74,11 @@ var happiness = tree({
   rootName: 'my-project'
 });
 
-happiness.ui.attach(document.querySelector('body'));
+happiness.ui.attach(document.querySelector('#container'));
 
 // initialize by retrieving root childNodes
-happiness.model.loadChildren();
+happiness.model.loadChildren()
+  .then(function () {
+    // happiness.model.getChild('abbrev').loadChildren();
+    happiness.model.getChild('asn1').loadChildren();
+  });
