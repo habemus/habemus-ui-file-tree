@@ -56,6 +56,15 @@ describe('Branch#moveChildTo(nodeName, toPath)', function () {
     ASSETS.b2.childNodes.length.should.equal(5);
   });
 
+  it('should modify the moved node\'s path', function () {
+
+    ASSETS.b1.path.should.equal('/b1');
+
+    ASSETS.root.moveChildTo('b1', 'b2');
+
+    ASSETS.b1.path.should.equal('/b2/b1');
+  });
+
   it('should fail to move the child node if the toPath does not exist', function () {
 
     ASSETS.root.childNodes.length.should.equal(2);
@@ -100,7 +109,8 @@ describe('Branch#moveChildTo(nodeName, toPath)', function () {
     // track node-moved events
     var moved = {};
 
-    ASSETS.b1.on('node-moved', function (toNode, node, index) {
+    ASSETS.b1.on('node-moved', function (fromNode, toNode, node, index) {
+      fromNode.should.equal(ASSETS.b1);
       toNode.should.equal(ASSETS.b11);
       node.should.equal(ASSETS.b13);
       index.should.equal(0);

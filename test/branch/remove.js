@@ -53,6 +53,14 @@ describe('Branch#removeChild(nodeName)', function () {
     ASSETS.root.getNodeByPath('b2/b21').should.equal(ASSETS.b21);
   });
 
+  it('should delete the removed node\'s parent', function () {
+
+    ASSETS.b1.removeChild('b11');
+
+    should(ASSETS.b11.parent).equal(undefined);
+  });
+
+
   it('should throw an error if the node to be removed does not exist', function () {
 
     assert.throws(function () {
