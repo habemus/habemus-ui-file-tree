@@ -1,4 +1,4 @@
- Prevent the text contents of draggable elements from being selectable. */
+ /*Prevent the text contents of draggable elements from being selectable. */
 [draggable] {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -51,6 +51,10 @@ li.ht-branch, li.ht-leaf {
   display: none;
 }
 
+.ht-branch.ht-collapsed [data-role="branch-label"] {
+  border-right: 1px solid gray;
+}
+
 .ht-branch.ht-loading [data-role="branch-label"] {
   background-color: rgba(255, 255, 0, 0.2);
 }
@@ -89,6 +93,10 @@ li.ht-branch, li.ht-leaf {
 .ht-leaf-label:hover {
   cursor: pointer;
   background-color: lightgray;
+}
+
+.ht-leaf.ht-selected .ht-leaf-label {
+  border-bottom: 1px solid darkred;
 }
 
 /* dragging behavior */

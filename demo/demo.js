@@ -16,7 +16,8 @@ var _readdir = Bluebird.promisify(fs.readdir);
 var _lstat   = Bluebird.promisify(fs.lstat);
 
 // constants
-const FS_ROOT_PATH = path.join(__dirname, '../node_modules');
+// const FS_ROOT_PATH = path.join(__dirname, '../node_modules');
+const FS_ROOT_PATH = path.join(__dirname, 'files');
 
 function wait(ms) {
   return new Bluebird((resolve, reject) => {
@@ -80,5 +81,5 @@ happiness.ui.attach(document.querySelector('#container'));
 happiness.model.loadChildren()
   .then(function () {
     // happiness.model.getChild('abbrev').loadChildren();
-    happiness.model.getChild('asn1').loadChildren();
+    // happiness.model.getChild('asn1').loadChildren();
   });
