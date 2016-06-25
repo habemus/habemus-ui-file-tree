@@ -13,8 +13,8 @@
  * Nodes in general
  */
 .ht-node {
-  transition: transform 0.1s ease, opacity 0.3s ease;
-  transform: translateX(-30%);
+  transition: transform 0.1s, opacity 0.1s;
+  transform: translateX(-10%);
   opacity: 0;
 }
 
@@ -29,7 +29,7 @@
 
 li.ht-node {
   list-style: none;
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .ht-node ul {
@@ -57,6 +57,7 @@ li.ht-node {
 }
 
 .ht-branch-label {
+  cursor: pointer;
   border-bottom: 1px solid gray;
 
   /* make the branch collapse */
@@ -64,7 +65,6 @@ li.ht-node {
 }
 
 .ht-branch-label:hover {
-  cursor: pointer;
   background-color: lightgray;
 }
 
@@ -118,11 +118,11 @@ li.ht-node {
 }
 
 .ht-leaf-label {
+  cursor: pointer;
   border-bottom: 1px dashed gray;
 }
 
 .ht-leaf-label:hover {
-  cursor: pointer;
   background-color: lightgray;
 }
 

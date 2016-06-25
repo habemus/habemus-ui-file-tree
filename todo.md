@@ -1,1 +1,2 @@
 - study move operation
+- remove and return the removed element instead of just deleting it altogether
