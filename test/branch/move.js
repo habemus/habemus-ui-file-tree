@@ -5,7 +5,7 @@ const should = require('should');
 
 const Branch = require('../../lib/model/branch');
 
-describe('Branch#moveChildTo(nodeName, toPath)', function () {
+describe('Branch#moveNode(nodePath, toPath)', function () {
 
   var ASSETS = {};
 
@@ -32,38 +32,51 @@ describe('Branch#moveChildTo(nodeName, toPath)', function () {
     ASSETS = {};
   });
 
-  it('should require nodeName', function () {
+  it('should require nodePath', function () {
 
     assert.throws(function () {
-      ASSETS.root.moveChildTo(undefined, 'b13');
+      ASSETS.root.moveNode(undefined, 'b13');
     });
   });
 
   it('should require toPath', function () {
     assert.throws(function () {
-      ASSETS.root.moveChildTo('b1', undefined);
+      ASSETS.root.moveNode('b1', undefined);
     });
   });
 
-  it('should move the child node to another path', function () {
+  it('should move the node to another path', function () {
 
     ASSETS.root.childNodes.length.should.equal(2);
     ASSETS.b2.childNodes.length.should.equal(4);
 
-    ASSETS.root.moveChildTo('b1', 'b2');
+    ASSETS.root.moveNode('b1', 'b2');
 
     ASSETS.root.childNodes.length.should.equal(1);
     ASSETS.b2.childNodes.length.should.equal(5);
+  });
+
+
+  it('should move the node to another path', function () {
+
+    ASSETS.root.childNodes.length.should.equal(2);
+    ASSETS.b1.childNodes.length.should.equal(4);
+
+    ASSETS.root.moveNode('b1/b11', '');
+
+    ASSETS.root.childNodes.length.should.equal(3);
+    ASSETS.b1.childNodes.length.should.equal(3);
   });
 
   it('should modify the moved node\'s path', function () {
 
     ASSETS.b1.path.should.equal('/b1');
 
-    ASSETS.root.moveChildTo('b1', 'b2');
+    ASSETS.root.moveNode('b1', 'b2');
 
     ASSETS.b1.path.should.equal('/b2/b1');
   });
+
 
   it('should fail to move the child node if the toPath does not exist', function () {
 
@@ -71,34 +84,33 @@ describe('Branch#moveChildTo(nodeName, toPath)', function () {
     ASSETS.b2.childNodes.length.should.equal(4);
 
     assert.throws(function () {
-      ASSETS.root.moveChildTo('b1', 'b3');
+      ASSETS.root.moveNode('b1', 'does-not-exist');
     });
 
     ASSETS.root.childNodes.length.should.equal(2);
     ASSETS.b2.childNodes.length.should.equal(4);
   });
 
-  it('should fail to move the child node if the toPath is a leaf node', function () {
+  it('should fail to move the node if the toPath is a leaf node', function () {
 
     ASSETS.root.childNodes.length.should.equal(2);
     ASSETS.b2.childNodes.length.should.equal(4);
 
     assert.throws(function () {
-      ASSETS.root.moveChildTo('b1', 'b2/b24');
+      ASSETS.root.moveNode('b1', 'b2/b24');
     });
 
     ASSETS.root.childNodes.length.should.equal(2);
     ASSETS.b2.childNodes.length.should.equal(4);
   });
 
-
-  it('should fail to move if the child node does not exist', function () {
+  it('should fail to move if the moved node does not exist', function () {
 
     ASSETS.root.childNodes.length.should.equal(2);
     ASSETS.b2.childNodes.length.should.equal(4);
 
     assert.throws(function () {
-      ASSETS.root.moveChildTo('does-not-exist', 'b2');
+      ASSETS.root.moveNode('does-not-exist', 'b2');
     });
 
     ASSETS.root.childNodes.length.should.equal(2);
@@ -121,13 +133,13 @@ describe('Branch#moveChildTo(nodeName, toPath)', function () {
     ASSETS.b1.childNodes.length.should.equal(4);
     ASSETS.b11.childNodes.length.should.equal(0);
 
-    ASSETS.b1.moveChildTo('b13', 'b11');
+    ASSETS.b1.moveNode('b13', 'b11');
 
     ASSETS.b1.childNodes.length.should.equal(3);
     ASSETS.b11.childNodes.length.should.equal(1);
 
     // move silently
-    ASSETS.b1.moveChildTo('b12', 'b11', { silent: true });
+    ASSETS.b1.moveNode('b12', 'b11', { silent: true });
 
     ASSETS.b1.childNodes.length.should.equal(2);
     ASSETS.b11.childNodes.length.should.equal(2);
@@ -141,6 +153,4 @@ describe('Branch#moveChildTo(nodeName, toPath)', function () {
       done();
     }, 200);
   });
-
-
 });
