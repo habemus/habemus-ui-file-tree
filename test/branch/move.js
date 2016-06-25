@@ -117,6 +117,23 @@ describe('Branch#moveNode(nodePath, toPath)', function () {
     ASSETS.b2.childNodes.length.should.equal(4);
   });
 
+  it('should fail to move a node to a path that is within itself', function () {
+
+    ASSETS.root.childNodes.length.should.equal(2);
+    ASSETS.b2.childNodes.length.should.equal(4);
+
+    assert.throws(function () {
+      ASSETS.root.moveNode('b2', 'b2/b22');
+    });
+
+    assert.throws(function () {
+      ASSETS.root.moveNode('b2', 'b2');
+    });
+
+    ASSETS.root.childNodes.length.should.equal(2);
+    ASSETS.b2.childNodes.length.should.equal(4);
+  });
+
   it('should emit `node-moved` event on the source node', function (done) {
     // track node-moved events
     var moved = {};

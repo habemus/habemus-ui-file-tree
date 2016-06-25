@@ -358,3 +358,70 @@ describe('Node#root', function () {
     branch11.root.should.equal(root);
   });
 });
+
+describe('Node#hasAncestor', function () {
+
+  var ASSETS;
+
+  beforeEach(function () {
+
+    ASSETS = {};
+
+    ASSETS.root = new Node({
+      type: 'root',
+      rootPath: 'root-path',
+    });
+
+    ASSETS.b0 = new Node({
+      type: 'branch',
+      name: 'b0',
+      parent: ASSETS.root,
+    });
+
+    ASSETS.b01 = new Node({
+      type: 'branch',
+      name: 'b01',
+      parent: ASSETS.b0
+    });
+
+    ASSETS.b1 = new Node({
+      type: 'branch',
+      name: 'b1',
+      parent: ASSETS.root
+    });
+
+    ASSETS.b11 = new Node({
+      type: 'branch',
+      name: 'b11',
+      parent: ASSETS.b1
+    });
+  });
+
+  afterEach(function () {
+    ASSETS = {};
+  });
+
+  it('should return false for a sibling node', function () {
+    ASSETS.b0.hasAncestor(ASSETS.b1).should.equal(false);
+  });
+
+  it('should return false for itself', function () {
+    ASSETS.b0.hasAncestor(ASSETS.b0).should.equal(false);
+  });
+
+  it('should return false for a child node', function () {
+    ASSETS.b0.hasAncestor(ASSETS.b01).should.equal(false);
+  });
+
+  it('should return true for a parent node', function () {
+    ASSETS.b01.hasAncestor(ASSETS.b0).should.equal(true);
+  });
+  
+  it('should return true for an ancestor node', function () {
+    ASSETS.b01.hasAncestor(ASSETS.root).should.equal(true);
+  });
+
+  it('should always return false for the root', function () {
+    ASSETS.root.hasAncestor(ASSETS.root).should.equal(false);
+  });
+})
