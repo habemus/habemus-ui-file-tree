@@ -17,6 +17,9 @@
   ],
   "dependencies": {
     "jquery": "^3.0.0",
-    "jQuery-contextMenu": "^2.2.0"
+    "jQuery-contextMenu": "^2.2.0",
+    "polymer": "^1.5.0",
+    "iron-icons": "PolymerElements/iron-icons#^1.1.3",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.8"
   }
 }

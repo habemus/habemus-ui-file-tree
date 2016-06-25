@@ -9,7 +9,30 @@
   -webkit-user-drag: element;
 }
 
-.ht-branch ul {
+/**
+ * Nodes in general
+ */
+.ht-node {
+  transition: transform 0.1s ease, opacity 0.3s ease;
+  transform: translateX(-30%);
+  opacity: 0;
+}
+
+/*.ht-node.exit {
+  transform: translateX(-100%);
+}*/
+
+.ht-node.ht-enter {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+li.ht-node {
+  list-style: none;
+  margin-left: 10px;
+}
+
+.ht-node ul {
   list-style: none;
   padding: 0 0;
 
@@ -19,14 +42,12 @@
   margin-right: 0;
 }
 
-li.ht-branch, li.ht-leaf {
-  list-style: none;
-  padding: 0 0;
-
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: 10px;
-  margin-right: 0;
+/**
+ * Root
+ */
+.ht-node.ht-root {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 
@@ -47,12 +68,20 @@ li.ht-branch, li.ht-leaf {
   background-color: lightgray;
 }
 
+.ht-branch-label iron-icon {
+  height: 1em;
+  width: 1em;
+  /* rotate chevron 90 deg so that chevron right is pointing down */
+  transform: rotateZ(90deg);
+}
+
 .ht-branch.ht-collapsed [data-role="branch-child-container"] {
   display: none;
 }
 
-.ht-branch.ht-collapsed [data-role="branch-label"] {
-  border-right: 1px solid gray;
+.ht-branch.ht-collapsed [data-role="branch-label"] iron-icon {
+  /* zero the rotation of the chevron */
+  transform: rotateZ(0deg);
 }
 
 .ht-branch.ht-loading [data-role="branch-label"] {
@@ -68,12 +97,14 @@ li.ht-branch, li.ht-leaf {
   color: white;
 }
 
-.ht-branch.ht-dragover > [data-role="branch-label"] {
+.ht-branch.ht-dragover > [data-role="branch-label"],
+.ht-root.ht-dragover > [data-role="branch-label"] {
   background-color: black;
   color: white;
 }
 
-.ht-branch.ht-dragover > [data-role="branch-child-container"] {
+.ht-branch.ht-dragover > [data-role="branch-child-container"],
+.ht-root.ht-dragover > [data-role="branch-child-container"] {
   background-color: black;
   color: white;
 }
@@ -93,6 +124,11 @@ li.ht-branch, li.ht-leaf {
 .ht-leaf-label:hover {
   cursor: pointer;
   background-color: lightgray;
+}
+
+.ht-leaf-label iron-icon {
+  height: 1em;
+  width: 1em;
 }
 
 .ht-leaf.ht-selected .ht-leaf-label {

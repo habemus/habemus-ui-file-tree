@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
 
-    <link rel="stylesheet" type="text/css" href="../lib/ui/styles.css">
+    <link rel="stylesheet" type="text/css" href="../lib/styles.css">
 
     <!-- jquery context menu -->
     <link rel="stylesheet" type="text/css" href="../bower_components/jQuery-contextMenu/dist/jQuery.contextMenu.css">
@@ -29,12 +29,27 @@
 
         background-color: rgb(250, 250, 255);
       }
+
+      #contents {
+        margin-left: 30vw;
+      }
     </style>
+
+    <link rel="import" href="../bower_components/polymer/polymer.html">
+    <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="../bower_components/iron-icons/editor-icons.html">
+    <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+
+    <link rel="stylesheet" type="text/css" href="">
   </head>
   <body>
 
     <div id="container">
 
+    </div>
+
+    <div id="contents">
+      <iron-icon icon="chevron-right"></iron-icon>
     </div>
 
     <script type="text/javascript">

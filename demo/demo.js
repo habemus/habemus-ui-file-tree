@@ -31,7 +31,7 @@ const hfs = {
     p = path.join(FS_ROOT_PATH, p);
 
     // simulate very bad connection
-    return wait(1000)
+    return wait(300)
       .then(() => {
         return _readdir(p)
       })
