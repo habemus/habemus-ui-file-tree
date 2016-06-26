@@ -17,7 +17,7 @@ var _lstat   = Bluebird.promisify(fs.lstat);
 
 // constants
 // const FS_ROOT_PATH = path.join(__dirname, '../node_modules');
-const FS_ROOT_PATH = path.join(__dirname, 'files');
+const FS_ROOT_PATH = path.join(__dirname, '_demo_files');
 
 function wait(ms) {
   return new Bluebird((resolve, reject) => {

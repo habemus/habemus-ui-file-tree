@@ -105,5 +105,35 @@ describe('Branch#removeChild(nodeName)', function () {
     }, 100);
   });
 
+  it('should remove all event listeners from the removed node', function (done) {
+    // starts at 4
+    ASSETS.b1.childNodes.length.should.equal(4);
+
+    // remove
+    ASSETS.b1.removeChild('b11');
+
+    ASSETS.b1.childNodes.length.should.equal(3);
+
+    // adding child nodes to b11 should not affect b1 anymore!
+    ASSETS.b1.on('node-added', function (parentNode, node, index) {
+      done(new Error('event should not have been triggered on b1'));
+    });
+
+    ASSETS.root.on('node-added', function (parentNode, node, index) {
+      done(new Error('event should not have been triggered on root'));
+    });
+
+    // the event should be triggered on the node itself
+    ASSETS.b11.on('node-added', function (parentNode, node, index) {
+
+      setTimeout(function () {
+        done();
+      }, 100);
+    });
+
+    // add a node to the removed branch
+    ASSETS.b11.createChild('branch', 'b111');
+  });
+
 
 });
