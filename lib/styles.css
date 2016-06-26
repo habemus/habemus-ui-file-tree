@@ -51,15 +51,19 @@ li.ht-node {
 }
 
 
+/**
+ * Labels
+ */
+.ht-label {
+  pointer-events: none;
+}
+
 /* branch */
 .ht-branch {
   -webkit-user-select: none;
 }
 
 .ht-branch-label {
-  pointer-events: none;
-
-  cursor: pointer;
   border-bottom: 1px solid gray;
 
   /* make the branch collapse */
@@ -120,9 +124,6 @@ li.ht-node {
 }
 
 .ht-leaf-label {
-  pointer-events: none;
-
-  cursor: pointer;
   border-bottom: 1px dashed gray;
 }
 
