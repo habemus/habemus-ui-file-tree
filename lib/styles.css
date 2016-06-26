@@ -57,6 +57,8 @@ li.ht-node {
 }
 
 .ht-branch-label {
+  pointer-events: none;
+
   cursor: pointer;
   border-bottom: 1px solid gray;
 
@@ -118,6 +120,8 @@ li.ht-node {
 }
 
 .ht-leaf-label {
+  pointer-events: none;
+
   cursor: pointer;
   border-bottom: 1px dashed gray;
 }
