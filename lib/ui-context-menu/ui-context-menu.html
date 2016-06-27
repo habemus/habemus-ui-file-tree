@@ -1,11 +1,27 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link 
+<link
   rel="import"
   href="../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
 
 <dom-module id="ht-ui-context-menu">
 
   <template>
+
+    <style>
+      :host {
+        background-color: white;
+        padding: 10px 10px;
+        position: fixed;
+      }
+    </style>
+
+    <template is="dom-repeat" items="{{ options }}">
+
+      <div on-tap="_handleOptionTap">
+        - {{ item.label }}
+      </div>
+    </template>
+
     <content></content>
   </template>
 
@@ -19,9 +35,67 @@
 
     is: 'ht-ui-context-menu',
 
+    properties: {
+      /**
+       * Array of context menu options
+       */
+      options: {
+        type: Array,
+      },
+
+      /**
+       * Holds data about the context of the menu open
+       */
+      context: {
+        type: Object,
+      }
+    },
+
     behaviors: [
       Polymer.IronOverlayBehavior
-    ]
+    ],
+
+    ready: function () {
+      // setup backdrop
+      this.setAttribute('with-backdrop', true);
+      // make backdrop traansparent
+      this.backdropElement.style.opacity = 0;
+    },
+
+    _handleOptionTap: function (e) {
+      var data = e.model.item;
+
+      data.callback({
+        menuElement: this,
+        menuOption: data,
+        context: this.get('context'),
+        event: e,
+      });
+    },
+
+    menuOpenWithContext: function (context, position) {
+      if (!position) { throw new Error('position is required'); }
+      if (!context) { throw new Error('context is required'); }
+
+      // set the context
+      this.set('context', context);
+
+      // let the menu resetFit (see IronOverlayBehavior docs)
+      this.resetFit();
+
+      // set positioning styles
+      this.style.left = position.left;
+      this.style.top  = position.top;
+
+      this.open();
+    },
+
+    menuClose: function () {
+      // unset context
+      this.set('context', null);
+
+      this.close();
+    },
 
   });
 
