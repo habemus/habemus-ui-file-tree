@@ -1,0 +1,101 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="ui-editable-label">
+  
+  <template>
+
+    <style>
+      #form {
+        display: inline-block;
+      }
+    </style>
+
+    <span
+      hidden$="{{ _editing }}"
+      id="label">{{ value }}</span>
+
+    <form
+      id="form"
+      hidden$="{{ !_editing }}"
+      on-submit="_handleSubmit"
+      on-keyup="_handleKeyup">
+      <input id="input" type="text" value="{{ value::input }}">
+    </form>
+  </template>
+</dom-module>
+
+<script>
+  (function () {
+    Polymer({
+      is: 'ui-editable-label',
+
+      properties: {
+        // not to be used externally
+        _editing: {
+          type: Boolean,
+          value: false
+        },
+
+        value: {
+          type: String,
+          notify: true,
+        },
+      },
+
+      edit: function (callback) {
+
+        var self = this;
+
+        // keep the original value in memory
+        self.set('_originalValue', this.get('value'));
+
+        self.set('_editing', true);
+
+        // select the whole text of the input
+        self.$.input.select();
+
+        self._editCallback = function (value) {
+          Promise.resolve(callback(value))
+            .then(function () {
+
+              // unset the _originalValue
+              self.set('_originalValue', false);
+
+              self.set('_editing', false);
+              delete self._editCallback;
+            })
+            .catch(function (err) {
+              console.warn('error editing', err);
+            });
+        };
+      },
+
+      cancel: function () {
+        this.set('value', this.get('_originalValue'));
+
+        this.set('_editing', false);
+
+        delete this._editCallback;
+      },
+
+      _handleSubmit: function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (!this._editing) {
+          return;
+        }
+
+        var value = this.$.input.value;
+
+        this._editCallback(value);
+      },
+
+      _handleKeyup: function (e) {
+        if (e.keyCode == 27) {
+          this.cancel();
+        }
+      },
+    })
+  })()
+</script>

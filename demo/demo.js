@@ -14,6 +14,8 @@ const tree = require('../lib');
 // promisify some methods
 var _readdir = Bluebird.promisify(fs.readdir);
 var _lstat   = Bluebird.promisify(fs.lstat);
+var _move    = Bluebird.promisify(fse.move);
+var _remove  = Bluebird.promisify(fse.remove);
 
 // constants
 // const FS_ROOT_PATH = path.join(__dirname, '../node_modules');
@@ -55,9 +57,10 @@ const hfs = {
   remove: function (p) {
     p = path.join(FS_ROOT_PATH, p);
 
-    console.log('remove ', p);
-
-    return wait(500);
+    return wait(500)
+      .then(function () {
+        return _remove(p);
+      });
   },
 
   writeFile: function (p, contents) {
@@ -66,6 +69,15 @@ const hfs = {
     console.log('create file ', p, ' with contents ', contents);
 
     return wait(300);
+  },
+
+  move: function (src, dest) {
+    src = path.join(FS_ROOT_PATH, src);
+    dest = path.join(FS_ROOT_PATH, dest);
+
+    return wait(300).then(function () {
+      return _move(src, dest);
+    });
   }
 };
 
@@ -78,8 +90,7 @@ var happiness = tree({
 happiness.ui.attach(document.querySelector('#container'));
 
 // initialize by retrieving root childNodes
-happiness.model.loadChildren()
+happiness.model.fsLoadContents()
   .then(function () {
-    // happiness.model.getChild('abbrev').loadChildren();
-    // happiness.model.getChild('asn1').loadChildren();
+    console.log('initial loading done');
   });
