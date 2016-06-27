@@ -12,10 +12,11 @@ const Bluebird = require('bluebird');
 const tree = require('../lib');
 
 // promisify some methods
-var _readdir = Bluebird.promisify(fs.readdir);
-var _lstat   = Bluebird.promisify(fs.lstat);
-var _move    = Bluebird.promisify(fse.move);
-var _remove  = Bluebird.promisify(fse.remove);
+var _writeFile = Bluebird.promisify(fs.writeFile);
+var _readdir   = Bluebird.promisify(fs.readdir);
+var _lstat     = Bluebird.promisify(fs.lstat);
+var _move      = Bluebird.promisify(fse.move);
+var _remove    = Bluebird.promisify(fse.remove);
 
 // constants
 // const FS_ROOT_PATH = path.join(__dirname, '../node_modules');
@@ -68,7 +69,10 @@ const hfs = {
 
     console.log('create file ', p, ' with contents ', contents);
 
-    return wait(300);
+    return wait(300)
+      .then(function () {
+        return _writeFile(p, contents);
+      });
   },
 
   move: function (src, dest) {

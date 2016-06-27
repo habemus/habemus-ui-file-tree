@@ -14,27 +14,39 @@
  */
 .ht-node {
   transition: transform 0.1s, opacity 0.1s;
+  /*do not leave the node with transform: translate, because the :before element
+  is affected by the translation
+  we use before element for wholerow highlighting*/
+  /*transform: translateX(-10%);*/
+  /*opacity: 0;*/
+}
+
+.ht-node.ht-exit {
   transform: translateX(-10%);
   opacity: 0;
 }
 
-/*.ht-node.exit {
-  transform: translateX(-100%);
-}*/
-
 .ht-node.ht-enter {
-  transform: translateX(0);
-  opacity: 1;
+  /*transform: translateX(0);*/
+  /*opacity: 1;*/
 }
 
 li.ht-node {
   list-style: none;
-  margin-left: 15px;
+
+
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .ht-node ul {
   list-style: none;
-  padding: 0 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 15px;
+  padding-right: 0;
 
   margin-top: 0;
   margin-bottom: 0;
@@ -46,7 +58,7 @@ li.ht-node {
  * Root
  */
 .ht-node.ht-root {
-  transform: translateX(0);
+  /*transform: translateX(0);*/
   opacity: 1;
 }
 
@@ -138,6 +150,17 @@ li.ht-node {
 
 .ht-leaf.ht-selected .ht-leaf-label {
   border-bottom: 1px solid darkred;
+}
+
+
+.ht-leaf.ht-selected:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background-color: skyblue;
+  z-index: -1;
 }
 
 /* dragging behavior */

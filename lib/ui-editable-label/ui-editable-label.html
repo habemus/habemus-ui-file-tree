@@ -8,11 +8,26 @@
       #form {
         display: inline-block;
       }
+
+      #input {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+
+        padding: 0 0;
+
+        background-color: #eeeeee;
+
+        /* let the input inherit all font specifications */
+        font: inherit;
+        outline: none;
+      }
     </style>
 
     <span
-      hidden$="{{ _editing }}"
-      id="label">{{ value }}</span>
+      id="label"
+      hidden$="{{ _editing }}">{{ value }}</span>
 
     <form
       id="form"
@@ -42,6 +57,16 @@
         },
       },
 
+      ready: function () {
+        // bind the _handleDocumentClick
+        this._handleDocumentClick = this._handleDocumentClick.bind(this);
+      },
+
+      /**
+       * Starts the label edition process
+       * @param  {Function} callback
+       *         Will be called upon submit
+       */
       edit: function (callback) {
 
         var self = this;
@@ -50,6 +75,13 @@
         self.set('_originalValue', this.get('value'));
 
         self.set('_editing', true);
+
+        // listen to click events on the document
+        // leave the event listener addition to the nextTick
+        // so that any click interactions are not affected
+        setTimeout(function () {
+          document.addEventListener('click', self._handleDocumentClick);
+        }, 0);
 
         // select the whole text of the input
         self.$.input.select();
@@ -65,12 +97,22 @@
               delete self._editCallback;
             })
             .catch(function (err) {
-              console.warn('error editing', err);
+              self.cancel();
             });
         };
       },
 
+      /**
+       * Cancels an edition.
+       */
       cancel: function () {
+        // remove the event listener from the document
+        document.removeEventListener('click', this._handleDocumentClick);
+
+        if (!this._editing) {
+          return;
+        }
+
         this.set('value', this.get('_originalValue'));
 
         this.set('_editing', false);
@@ -78,6 +120,10 @@
         delete this._editCallback;
       },
 
+      /**
+       * Handles the submit of the input field
+       * @param  {DOM Event} e
+       */
       _handleSubmit: function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -91,8 +137,36 @@
         this._editCallback(value);
       },
 
+      /**
+       * Handles the keyup on the input
+       * Checks for 'esc' (key 27) and cancels if pressed
+       * @param  {DOM Event (Keyboard)} e
+       */
       _handleKeyup: function (e) {
         if (e.keyCode == 27) {
+          this.cancel();
+        }
+      },
+
+      /**
+       * Handles clicks on the document.
+       * Cancels the edition if the click happened outside of the
+       * editable label.
+       *
+       * This should be done very carefully:
+       * add it to the listeners array and ALWAYS remove
+       * 
+       * @param  {DOM Event} e
+       */
+      _handleDocumentClick: function (e) {
+
+        // https://developer.mozilla.org/en-US/docs/Web/API/Node/contains
+        var target = e.target;
+
+        if (target === this || this.contains(target)) {
+          console.log('heyreer')
+        } else {
+          console.log('out!')
           this.cancel();
         }
       },
