@@ -31,6 +31,8 @@
   position: absolute;
   left: 0;
   right: 0;
+
+  /* height must match the icon's height */
   height: 20px;
   background-color: skyblue;
   z-index: -1;
@@ -38,8 +40,6 @@
 
 li.ht-node {
   list-style: none;
-
-
   margin-top: 0;
   margin-bottom: 0;
   margin-left: 0;
@@ -72,8 +72,26 @@ li.ht-node {
  * Labels
  */
 .ht-label {
+  /**
+   * cancel pointer events so that life is easier
+   * for drag and drop interactions
+   */
   pointer-events: none;
+
+  font-size: 14px;
+
+  /* align stuff */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
+
+.ht-label iron-icon {
+  height: 20px;
+  width: 20px;
+}
+
+/* labels */
 
 /* branch */
 .ht-branch {
@@ -81,7 +99,7 @@ li.ht-node {
 }
 
 .ht-branch-label {
-  border-bottom: 1px solid gray;
+  /*border-bottom: 1px solid gray;*/
 
   /* make the branch collapse */
   display: inline-block;
@@ -91,11 +109,13 @@ li.ht-node {
   background-color: lightgray;
 }
 
-.ht-branch-label iron-icon {
-  height: 1em;
-  width: 1em;
+.ht-branch-label iron-icon[icon="chevron-right"] {
   /* rotate chevron 90 deg so that chevron right is pointing down */
   transform: rotateZ(90deg);
+}
+
+.ht-branch-label iron-icon[icon="folder"] {
+  margin-right: 5px;
 }
 
 .ht-branch.ht-collapsed [data-role="branch-child-container"] {
@@ -141,20 +161,18 @@ li.ht-node {
 }
 
 .ht-leaf-label {
-  border-bottom: 1px dashed gray;
+}
+
+.ht-leaf-label iron-icon {
+  /* add left margin to leaf-label icon so that leaf icon
+   * aligns correctly with branch icons
+   */
+  margin-left: 20px;
+  margin-right: 5px;
 }
 
 .ht-leaf-label:hover {
   background-color: lightgray;
-}
-
-.ht-leaf-label iron-icon {
-  height: 1em;
-  width: 1em;
-}
-
-.ht-leaf.ht-selected .ht-leaf-label {
-  border-bottom: 1px solid darkred;
 }
 
 /* dragging behavior */

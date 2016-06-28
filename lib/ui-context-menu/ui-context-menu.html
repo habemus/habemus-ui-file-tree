@@ -140,6 +140,16 @@
       this.setAttribute('with-backdrop', true);
       // make backdrop traansparent
       this.backdropElement.style.opacity = 0;
+
+      // bind the _handleBackdropContextmenu to this element
+      this._handleBackdropContextmenu = this._handleBackdropContextmenu.bind(this);
+
+      // let backdropElement close on contextmenu event
+      this.backdropElement.addEventListener('contextmenu', this._handleBackdropContextmenu);
+    },
+
+    _handleBackdropContextmenu: function (e) {
+      this.menuClose();
     },
 
     _handleOptionTap: function (e) {

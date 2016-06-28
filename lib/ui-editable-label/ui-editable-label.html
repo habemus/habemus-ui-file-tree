@@ -1,8 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <dom-module id="ui-editable-label">
-  
-  <template>
+
+  <template strip-whitespace>
 
     <style>
       #form {
@@ -155,7 +155,7 @@
        *
        * This should be done very carefully:
        * add it to the listeners array and ALWAYS remove
-       * 
+       *
        * @param  {DOM Event} e
        */
       _handleDocumentClick: function (e) {
