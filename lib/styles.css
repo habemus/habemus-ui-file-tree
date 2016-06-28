@@ -26,9 +26,14 @@
   opacity: 0;
 }
 
-.ht-node.ht-enter {
-  /*transform: translateX(0);*/
-  /*opacity: 1;*/
+.ht-node.ht-selected:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background-color: skyblue;
+  z-index: -1;
 }
 
 li.ht-node {
@@ -152,21 +157,10 @@ li.ht-node {
   border-bottom: 1px solid darkred;
 }
 
-
-.ht-leaf.ht-selected:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 20px;
-  background-color: skyblue;
-  z-index: -1;
-}
-
 /* dragging behavior */
 .ht-leaf.ht-dragging .ht-leaf-label {
   background-color: darkred;
   opacity: 0.8;
   color: white;
 }
-/* leaf 
+/* leaf
