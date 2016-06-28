@@ -26,7 +26,7 @@
   opacity: 0;
 }
 
-.ht-node.ht-selected {
+.ht-node.ht-selected > .ht-label {
   color: white;
 }
 

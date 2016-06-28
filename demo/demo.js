@@ -34,7 +34,7 @@ const FS_ROOT_PATH = path.join(__dirname, '_demo_files');
 
 function wait(ms) {
   return new Bluebird((resolve, reject) => {
-    setTimeout(resolve, ms);
+    setTimeout(resolve, 0);
   });
 }
 
@@ -44,7 +44,7 @@ const hfs = {
     p = path.join(FS_ROOT_PATH, p);
 
     // simulate very bad connection
-    return wait(600)
+    return wait()
       .then(() => {
         return _readdir(p)
       })
@@ -68,7 +68,7 @@ const hfs = {
   remove: function (p) {
     p = path.join(FS_ROOT_PATH, p);
 
-    return wait(600)
+    return wait()
       .then(function () {
         return _remove(p);
       });
@@ -79,7 +79,7 @@ const hfs = {
 
     console.log('create file ', p, ' with contents ', contents);
 
-    return wait(600)
+    return wait()
       .then(function () {
         return _writeFile(p, contents);
       });
@@ -89,7 +89,7 @@ const hfs = {
     src = path.join(FS_ROOT_PATH, src);
     dest = path.join(FS_ROOT_PATH, dest);
 
-    return wait(600).then(function () {
+    return wait().then(function () {
       return _move(src, dest);
     });
   },
@@ -97,7 +97,7 @@ const hfs = {
   readFile: function (p, options) {
     p = path.join(FS_ROOT_PATH, p);
 
-    return wait(600).then(function () {
+    return wait().then(function () {
       return _readFile(p, options);
     });
   }
