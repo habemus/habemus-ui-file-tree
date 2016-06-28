@@ -26,6 +26,10 @@
   opacity: 0;
 }
 
+.ht-node.ht-selected {
+  color: white;
+}
+
 .ht-node.ht-selected:before {
   content: '';
   position: absolute;
@@ -34,7 +38,7 @@
 
   /* height must match the icon's height */
   height: 20px;
-  background-color: skyblue;
+  background-color: #aaa;
   z-index: -1;
 }
 
@@ -128,7 +132,8 @@ li.ht-node {
 }
 
 .ht-branch.ht-loading [data-role="branch-label"] {
-  background-color: rgba(255, 255, 0, 0.2);
+  /*background-color: rgba(255, 255, 0, 0.2);*/
+  opacity: 0.6;
 }
 
 /* dragging behavior */
