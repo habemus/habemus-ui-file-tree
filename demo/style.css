@@ -1,0 +1,34 @@
+body {
+  margin: 0 0;
+
+  font-family: sans-serif;
+}
+
+#tree-container {
+  position: fixed;
+
+  left: 0;
+  top: 0;
+  width: 30vw;
+
+  height: 100%;
+
+  overflow: auto;
+
+  background-color: rgb(250, 250, 255);
+}
+
+#contents {
+  margin-left: 30vw;
+}
+
+#tabs {
+  background-color: black;
+
+  height: 30px;
+}
+
+#editor {
+  /*background-color: darkred;*/
+  height: calc(100vh - 30px);
+}
