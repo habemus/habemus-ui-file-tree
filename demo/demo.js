@@ -35,12 +35,12 @@ const FS_ROOT_PATH = path.join(__dirname, '_demo_files');
 
 function wait(ms) {
   return new Bluebird((resolve, reject) => {
-    setTimeout(resolve, 0);
+    setTimeout(resolve, 300);
   });
 }
 
 const hfs = {
-  readdirStats: function (p) {
+  readDirectory: function (p) {
     // build the real path
     p = path.join(FS_ROOT_PATH, p);
 
@@ -75,17 +75,6 @@ const hfs = {
       });
   },
 
-  writeFile: function (p, contents) {
-    p = path.join(FS_ROOT_PATH, p);
-
-    console.log('create file ', p, ' with contents ', contents);
-
-    return wait()
-      .then(function () {
-        return _writeFile(p, contents);
-      });
-  },
-
   move: function (src, dest) {
     src = path.join(FS_ROOT_PATH, src);
     dest = path.join(FS_ROOT_PATH, dest);
@@ -103,6 +92,23 @@ const hfs = {
     });
   },
 
+  createFile: function (p) {
+    p = path.join(FS_ROOT_PATH, p);
+
+    return wait()
+      .then(function () {
+        return _lstat(p);
+      })
+      .then(function (stats) {
+        // stats exist, throw error
+        return Bluebird.reject('file exists');
+      })
+      .catch(function (err) {
+        // stats do not exist, create file
+        return _writeFile(p, '');
+      });
+  },
+
   createDirectory: function (p) {
     p = path.join(FS_ROOT_PATH, p);
 
@@ -117,9 +123,9 @@ var happiness = tree({
   hfs: hfs,
   rootName: 'my-project'
 });
-happiness.ui.attach(document.querySelector('#tree-container'));
+happiness.attach(document.querySelector('#tree-container'));
 // initialize by retrieving root childNodes
-happiness.model.fsLoadContents()
+happiness.openDirectory('')
   .then(function () {
     console.log('initial loading done');
   });
@@ -128,7 +134,7 @@ happiness.model.fsLoadContents()
 // editor //
 var editor = ace.edit(document.querySelector('#editor'));
 
-happiness.ui.addTreeEventListener('click', 'leaf', function (data) {
+happiness.uiAddTreeEventListener('click', 'leaf', function (data) {
   console.log(data.model.path);
 
   hfs.readFile(data.model.path, 'utf8')

@@ -3,8 +3,8 @@ const assert = require('assert');
 
 const should = require('should');
 
-const Branch = require('../../lib/model/branch');
-const Leaf = require('../../lib/model/leaf');
+const Branch = require('../../lib/model/tree/branch');
+const Leaf = require('../../lib/model/tree/leaf');
 
 describe('Branch#getChild(nodeName)', function () {
 

@@ -4,7 +4,7 @@ const assert = require('assert');
 // third-party deps
 const should = require('should');
 
-const Node = require('../lib/model/node');
+const Node = require('../lib/model/tree/node');
 
 describe('new Node', function () {
 

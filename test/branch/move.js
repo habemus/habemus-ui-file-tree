@@ -3,7 +3,7 @@ const assert = require('assert');
 
 const should = require('should');
 
-const Branch = require('../../lib/model/branch');
+const Branch = require('../../lib/model/tree/branch');
 
 describe('Branch#moveNode(nodePath, toPath)', function () {
 
