@@ -39,7 +39,7 @@
   /* height must match the icon's height */
   height: 20px;
   background-color: #aaa;
-  z-index: -1;
+  z-index: 0;
 }
 
 li.ht-node {
@@ -82,17 +82,25 @@ li.ht-node {
    */
   pointer-events: none;
 
-  font-size: 14px;
+  font-size: 13px;
 
   /* align stuff */
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  white-space: nowrap;
+
+  position: relative;
+  z-index: 1;
 }
 
 .ht-label iron-icon {
   height: 20px;
   width: 20px;
+
+  /* prevent icon from shrinking */
+  flex-shrink: 0;
 }
 
 /* labels */
@@ -129,6 +137,10 @@ li.ht-node {
 .ht-branch.ht-collapsed [data-role="branch-label"] iron-icon {
   /* zero the rotation of the chevron */
   transform: rotateZ(0deg);
+}
+
+.ht-branch [data-role="branch-label"] {
+  transition: opacity .5s ease;
 }
 
 .ht-branch.ht-loading [data-role="branch-label"] {

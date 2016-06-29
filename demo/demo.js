@@ -24,6 +24,7 @@ const tree = require('../lib');
 var _writeFile = Bluebird.promisify(fs.writeFile);
 var _readdir   = Bluebird.promisify(fs.readdir);
 var _readFile  = Bluebird.promisify(fs.readFile);
+var _mkdir     = Bluebird.promisify(fs.mkdir);
 var _lstat     = Bluebird.promisify(fs.lstat);
 var _move      = Bluebird.promisify(fse.move);
 var _remove    = Bluebird.promisify(fse.remove);
@@ -99,6 +100,14 @@ const hfs = {
 
     return wait().then(function () {
       return _readFile(p, options);
+    });
+  },
+
+  createDirectory: function (p) {
+    p = path.join(FS_ROOT_PATH, p);
+
+    return wait().then(function () {
+      return _mkdir(p);
     });
   }
 };
