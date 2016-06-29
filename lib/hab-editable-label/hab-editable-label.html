@@ -97,7 +97,7 @@
               delete self._editCallback;
             })
             .catch(function (err) {
-              self.cancel();
+              self.cancel(err);
             });
         };
       },
@@ -105,7 +105,7 @@
       /**
        * Cancels an edition.
        */
-      cancel: function () {
+      cancel: function (reason) {
         // remove the event listener from the document
         document.removeEventListener('click', this._handleDocumentClick);
 
@@ -118,6 +118,11 @@
         this.set('_editing', false);
 
         delete this._editCallback;
+
+        // fire event
+        this.fire('cancel', {
+          reason: reason,
+        });
       },
 
       /**
@@ -144,7 +149,7 @@
        */
       _handleKeyup: function (e) {
         if (e.keyCode == 27) {
-          this.cancel();
+          this.cancel('ESC_KEY_PRESSED');
         }
       },
 
@@ -164,10 +169,9 @@
         var target = e.target;
 
         if (target === this || this.contains(target)) {
-          console.log('heyreer')
+          return;
         } else {
-          console.log('out!')
-          this.cancel();
+          this.cancel('CLICKED_OUTSIDE');
         }
       },
     })
