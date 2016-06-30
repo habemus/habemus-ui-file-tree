@@ -56,7 +56,6 @@ describe('Branch#moveNode(nodePath, toPath)', function () {
     ASSETS.b2.childNodes.length.should.equal(5);
   });
 
-
   it('should move the node to another path', function () {
 
     ASSETS.root.childNodes.length.should.equal(2);
@@ -77,6 +76,18 @@ describe('Branch#moveNode(nodePath, toPath)', function () {
     ASSETS.b1.path.should.equal('/b2/b1');
   });
 
+  it('should do nothing if the node is already at its target path', function () {
+
+    ASSETS.b1.childNodes.length.should.equal(4);
+    ASSETS.b2.childNodes.length.should.equal(4);
+
+    ASSETS.root.moveNode('b1/b11', 'b1');
+
+    ASSETS.b1.childNodes.length.should.equal(4);
+    ASSETS.b2.childNodes.length.should.equal(4);
+
+    ASSETS.b11.path.should.equal('/b1/b11');
+  });
 
   it('should fail to move the child node if the toPath does not exist', function () {
 
