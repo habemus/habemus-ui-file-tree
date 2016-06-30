@@ -1,3 +1,2 @@
-- study move operation
-- remove and return the removed element instead of just deleting it altogether
-- break context menu into branch and leaf
+- tightly bind the ui to events on the model (statuses)
+- make readDirectory operations return currently running op on repeated read request

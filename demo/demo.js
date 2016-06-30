@@ -125,10 +125,26 @@ var happiness = tree({
 });
 happiness.attach(document.querySelector('#tree-container'));
 // initialize by retrieving root childNodes
-happiness.openDirectory('')
-  .then(function () {
-    console.log('initial loading done');
-  });
+// happiness.openDirectory('')
+//   .then(function () {
+//     console.log('initial loading done');
+//   });
+
+// happiness.openDirectory(
+//   '/ccc/aaabb./commd/chalk/'
+// ).then(function () {
+//   console.log('reached end');
+// }).catch(function (err) {
+//   console.warn('could not reach end', err);
+// });
+
+happiness.openDirectory(
+  '/ccc/aaabb./commd/chalk/clone-stats/caseless/center-align/buffer-shims/images/test'
+).then(function () {
+  console.log('reached end');
+}).catch(function (err) {
+  console.warn('could not reach end', err);
+});
 
 ////////////
 // editor //
