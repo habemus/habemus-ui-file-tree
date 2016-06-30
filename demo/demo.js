@@ -138,13 +138,23 @@ happiness.attach(document.querySelector('#tree-container'));
 //   console.warn('could not reach end', err);
 // });
 
-happiness.openDirectory(
-  '/ccc/aaabb./commd/chalk/clone-stats/caseless/center-align/buffer-shims/images/test'
-).then(function () {
-  console.log('reached end');
-}).catch(function (err) {
-  console.warn('could not reach end', err);
-});
+// happiness.openDirectory(
+//   '/ccc/aaabb./commd/chalk/clone-stats/caseless/center-align/buffer-shims/images/test'
+// ).then(function () {
+//   console.log('reached end');
+// }).catch(function (err) {
+//   console.warn('could not reach end', err);
+// });
+
+happiness.revealPath(
+  '/ccc/aaabb./commd/chalk/clone-stats/caseless/center-align/buffer-shims/images/index.js'
+)
+.then(function () {
+  console.log('revealed');
+})
+.catch(function (err) {
+  console.warn('could not reveal', err);
+})
 
 ////////////
 // editor //
