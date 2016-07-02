@@ -43,9 +43,11 @@ const hfs = {
             .then((stat) => {
 
               // process the stat object before returning
-              stat.basename = contentName;
-
-              return stat;
+              return {
+                basename: contentName,
+                isDirectory: stat.isDirectory(),
+                isFile: stat.isFile(),
+              };
             });
         }));
       });
