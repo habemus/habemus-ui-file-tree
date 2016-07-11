@@ -20,21 +20,12 @@ const MODES = {
 // the UITree Constructor
 const tree = require('../lib');
 
-// constants
-// const FS_ROOT_PATH = path.join(__dirname, '../node_modules');
-const FS_ROOT_PATH = path.join(__dirname, '_demo_files');
-
-function wait(ms) {
-  return new Bluebird((resolve, reject) => {
-    setTimeout(resolve, 300);
-  });
-}
-
-const hfs = require('./hfs');
+// the h-dev api
+const hDev = require('./h-dev');
 
 // instantiate the tree ui
 var happiness = tree({
-  hfs: hfs,
+  hDev: hDev,
   rootName: 'my-project'
 });
 happiness.attach(document.querySelector('#tree-container'));
@@ -77,7 +68,7 @@ var editor = ace.edit(document.querySelector('#editor'));
 happiness.uiAddTreeEventListener('click', 'leaf', function (data) {
   console.log(data.model.path);
 
-  hfs.readFile(data.model.path, 'utf8')
+  hDev.readFile(data.model.path, 'utf8')
     .then(function (contents) {
 
       // save the open path to the editor object
@@ -105,7 +96,7 @@ function save() {
   if (editor.path) {
     var value = editor.getValue();
 
-    hfs.writeFile(editor.path, value);
+    hDev.writeFile(editor.path, value);
   }
 }
 listener.simple_combo('cmd s', save);
