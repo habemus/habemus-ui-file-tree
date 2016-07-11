@@ -5,6 +5,11 @@ const fs   = require('fs');
 const fse        = require('fs-extra');
 const Bluebird   = require('bluebird');
 
+// habemus dependencies
+const createHFs = require('h-fs');
+
+const createHDev = require('h-dev-electron');
+
 // promisify some methods
 var _writeFile = Bluebird.promisify(fs.writeFile);
 var _readdir   = Bluebird.promisify(fs.readdir);
@@ -24,85 +29,6 @@ function wait(ms) {
   });
 }
 
-const hfs = {
-  readDirectory: function (p) {
-    // build the real path
-    p = path.join(FS_ROOT_PATH, p);
+hfsAPI = createHDev(FS_ROOT_PATH);
 
-    // simulate very bad connection
-    return wait()
-      .then(() => {
-        return _readdir(p)
-      })
-      .then((contents) => {
-        return Bluebird.all(contents.map((contentName) => {
-
-          var contentPath = path.join(p, contentName);
-
-          return _lstat(contentPath)
-            .then((stat) => {
-
-              // process the stat object before returning
-              return {
-                basename: contentName,
-                isDirectory: stat.isDirectory(),
-                isFile: stat.isFile(),
-              };
-            });
-        }));
-      });
-  },
-
-  remove: function (p) {
-    p = path.join(FS_ROOT_PATH, p);
-
-    return wait()
-      .then(function () {
-        return _remove(p);
-      });
-  },
-
-  move: function (src, dest) {
-    src = path.join(FS_ROOT_PATH, src);
-    dest = path.join(FS_ROOT_PATH, dest);
-
-    return wait().then(function () {
-      return _move(src, dest);
-    });
-  },
-
-  readFile: function (p, options) {
-    p = path.join(FS_ROOT_PATH, p);
-
-    return wait().then(function () {
-      return _readFile(p, options);
-    });
-  },
-
-  createFile: function (p) {
-    p = path.join(FS_ROOT_PATH, p);
-
-    return wait()
-      .then(function () {
-        return _lstat(p);
-      })
-      .then(function (stats) {
-        // stats exist, throw error
-        return Bluebird.reject('file exists');
-      })
-      .catch(function (err) {
-        // stats do not exist, create file
-        return _writeFile(p, '');
-      });
-  },
-
-  createDirectory: function (p) {
-    p = path.join(FS_ROOT_PATH, p);
-
-    return wait().then(function () {
-      return _mkdir(p);
-    });
-  }
-};
-
-module.exports = hfs;
+module.exports = hfsAPI;

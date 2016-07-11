@@ -135,5 +135,19 @@ describe('Branch#removeChild(nodeName)', function () {
     ASSETS.b11.createChild('branch', 'b111');
   });
 
+  describe('Branch#removeSelf()', function () {
+
+    it('should remove the node itself from the tree', function () {
+      // starts at 4
+      ASSETS.b1.childNodes.length.should.equal(4);
+
+      // remove
+      ASSETS.b1.removeChild('b11');
+
+      ASSETS.b1.childNodes.length.should.equal(3);
+
+    });
+
+  });
 
 });
