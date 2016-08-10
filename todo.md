@@ -1,2 +1,3 @@
 - tightly bind the ui to events on the model (statuses)
 - make readDirectory operations return currently running op on repeated read request
+- IMPLEMENTE FILESYSTEM WATCHING IN DEMO
