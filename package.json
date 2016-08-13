@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "bluebird": "^3.4.1",
-    "clipboard-js": "^0.2.0",
     "h-fs": "git+ssh://git@bitbucket.org/habemus-tutti/h-fs.git",
     "sorted-array": "^2.0.1"
   }
