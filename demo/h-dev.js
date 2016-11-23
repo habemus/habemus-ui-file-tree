@@ -26,21 +26,21 @@ var hDevAPI = {
 }
 
 hDevAPI.subscribe = function () {
-  console.log('subscribe', arguments);
+  // console.log('subscribe', arguments);
   return hFs.on.apply(hFs, _toArray(arguments));
 };
 
 hDevAPI.publish = function () {
-  console.log('publish', arguments);
+  // console.log('publish', arguments);
 };
 
 hDevAPI.startWatching = function () {
-  console.log('startWatching', arguments);
+  // console.log('startWatching', arguments);
   return Bluebird.resolve();
 };
 
 hDevAPI.stopWatching = function () {
-  console.log('stopWatching', arguments);
+  // console.log('stopWatching', arguments);
   return Bluebird.resolve();
 };
 
