@@ -22,13 +22,8 @@ body {
   margin-left: 30vw;
 }
 
-#tabs {
+#controls {
   background-color: black;
 
   height: 30px;
-}
-
-#editor {
-  /*background-color: darkred;*/
-  height: calc(100vh - 30px);
 }

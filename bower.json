@@ -24,8 +24,5 @@
     "hab-context-menu": "git@github.com:habemus/hab-context-menu.git",
     "hab-editable-label": "git@github.com:habemus/hab-editable-label.git"
   },
-  "devDependencies": {
-    "ace-builds": "^1.2.3",
-    "Keypress": "^2.1.4"
-  }
+  "devDependencies": {}
 }
