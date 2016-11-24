@@ -33,9 +33,7 @@
     "succeeded": "'%{fileName}' successfully uploaded.",
     "failed": "Upload of file '%{fileName}' failed: %{errorName}",
     "error-missing-file-name": "Could not identify the name of the selected file.",
-    "error-max-size-exceeded": "The file '%{fileName}' exeeds the max upload size (%{maxSize})."
-  },
-  "happiness-tree.general-errors": {
-    "move": "Error moving"
+    "error-max-size-exceeded": "The file '%{fileName}' exeeds the max upload size (%{maxSize}).",
+    "all-files-succeeded": "All files successfully uploaded"
   }
 }
