@@ -9,7 +9,9 @@
 
     "new-placeholder": "new file",
     "copy-path": "copy file path",
-    "open-in-new-tab": "open in new tab"
+    "open-in-new-tab": "open in new tab",
+
+    "error-moving": "Error moving '%{fileName}'"
   },
   "happiness-tree.directory": {
     "new": "new directory",
@@ -20,7 +22,10 @@
     "new-placeholder": "new directory",
     "copy-path": "copy directory path",
     "upload-file": "upload file",
-    "upload-directory": "upload directory"
+    "upload-directory": "upload directory",
+
+    "error-reading": "Error reading '%{directoryName}'",
+    "error-moving": "Error moving '%{directoryName}'"
   },
   "happiness-tree.upload": {
     "reading-file": "Reading '%{fileName}' ...",
@@ -29,5 +34,8 @@
     "failed": "Upload of file '%{fileName}' failed: %{errorName}",
     "error-missing-file-name": "Could not identify the name of the selected file.",
     "error-max-size-exceeded": "The file '%{fileName}' exeeds the max upload size (%{maxSize})."
+  },
+  "happiness-tree.general-errors": {
+    "move": "Error moving"
   }
 }
