@@ -7,6 +7,7 @@ const Bluebird  = require('bluebird');
 
 // constants
 const FS_ROOT_PATH = path.join(__dirname, '../_demo_files');
+const H_DEV_DELAY  = 500;
 
 function _toArray(obj) {
   return Array.prototype.slice.call(obj, 0);
@@ -43,6 +44,26 @@ hDevAPI.stopWatching = function () {
   // console.log('stopWatching', arguments);
   return Bluebird.resolve();
 };
+
+if (H_DEV_DELAY) {
+
+  Object.keys(hDevAPI).forEach(function (methodName) {
+    if (typeof hDevAPI[methodName] === 'function') {
+      var originalMethod = hDevAPI[methodName];
+
+      hDevAPI[methodName] = function () {
+        var args = Array.prototype.slice.call(arguments, 0);
+
+        return new Bluebird(function (resolve, reject) {
+          setTimeout(resolve, H_DEV_DELAY);
+        })
+        .then(function () {
+          return originalMethod.apply(hDevAPI, args);
+        });
+      }
+    }
+  });
+}
 
 // set implementation specific methods
 hDevAPI.projectRootURL = 'file://' + FS_ROOT_PATH;

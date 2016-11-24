@@ -1,13 +1,25 @@
+
+var uiNotifications = document.querySelector('#ui-notifications');
+
+function _appendLog(className, options) {
+  var el = document.createElement('pre');
+  el.className = className;
+  el.innerHTML = typeof options === 'string' ?
+    options : JSON.stringify(options, null, '  ');
+
+  uiNotifications.appendChild(el);
+}
+
 /**
  * Loading
  */
 exports.loading = {
   _timeout: false,
   show: function (options) {
-    console.log('show loading', options);
+    _appendLog('notification-loading', options);
   },
   hide: function () {
-    console.log('hide loading');
+    _appendLog('notification-loading', 'hide loading');
   },
 };
 
@@ -17,10 +29,10 @@ exports.loading = {
 exports.success = {
   _timeout: false,
   show: function (options) {
-    console.log('show success', options);
+    _appendLog('notification-success', options);
   },
   hide: function () {
-    console.log('hide success');
+    _appendLog('notification-success', 'hide success');
   },
 };
 
@@ -30,9 +42,9 @@ exports.success = {
 exports.error = {
   _timeout: false,
   show: function (options) {
-    console.warn('show error', options);
+    _appendLog('notification-error', options);
   },
   hide: function () {
-    console.log('hide error');
+    _appendLog('notification-error', 'hide error');
   },
 };

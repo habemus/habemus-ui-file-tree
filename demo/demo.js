@@ -18,12 +18,20 @@ var happiness = tree({
   
   rootName: 'my-project',
   translate: translations.t.bind(translations),
+
+  config: {
+    enablePreload: true,
+    maxFileUploadSize: '5MB',
+  },
 });
 happiness.attach(document.querySelector('#tree-container'));
 // initialize by retrieving root childNodes
 happiness.openDirectory('')
   .then(function () {
     console.log('initial loading done');
+  })
+  .catch(function (err) {
+    console.warn(err.stack);
   });
 
 /**
