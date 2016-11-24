@@ -1,8 +1,25 @@
 {
-  "happiness-tree.new-file": "new file",
-  "happiness-tree.new-directory": "new directory",
-  "happiness-tree.rename-directory": "rename directory",
-  "happiness-tree.rename-file": "rename file",
-  "happiness-tree.new-file-placeholder": "new file",
-  "happiness-tree.new-directory-placeholder": "new directory"
+  "happiness-tree.file": {
+    "new": "new file",
+    "rename": "rename file",
+    "remove": "remove file",
+    "remove-confirm": "confirm remove file",
+    "duplicate": "duplicate file",
+    "duplicate-prompt": "duplicate file path",
+
+    "new-placeholder": "new file",
+    "copy-path": "copy file path",
+    "open-in-new-tab": "open in new tab"
+  },
+  "happiness-tree.directory": {
+    "new": "new directory",
+    "rename": "rename directory",
+    "remove": "remove directory",
+    "remove-confirm": "confirm remove directory",
+
+    "new-placeholder": "new directory",
+    "copy-path": "copy directory path",
+    "upload-file": "upload file",
+    "upload-directory": "upload directory"
+  }
 }

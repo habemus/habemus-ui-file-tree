@@ -6,7 +6,7 @@ const createHFs = require('h-fs');
 const Bluebird  = require('bluebird');
 
 // constants
-const FS_ROOT_PATH = path.join(__dirname, '_demo_files');
+const FS_ROOT_PATH = path.join(__dirname, '../_demo_files');
 
 function _toArray(obj) {
   return Array.prototype.slice.call(obj, 0);

@@ -6,11 +6,55 @@
 
     <link rel="stylesheet" type="text/css" href="../lib/styles.css">
 
+    <style type="text/css">
+      body {
+        margin: 0 0;
+
+        font-family: sans-serif;
+      }
+
+      #tree-container {
+        position: fixed;
+
+        left: 0;
+        top: 0;
+        width: 30vw;
+
+        height: 100%;
+
+        overflow: auto;
+
+        background-color: rgb(250, 250, 255);
+      }
+
+      #contents {
+        margin-left: 30vw;
+      }
+
+      #demo-controls,
+      #ui-dialogs {
+        display: flex;
+        flex-direction: row;
+      }
+
+      #demo-controls > *,
+      #ui-dialogs > * {
+        width: 50%;
+        box-sizing: border-box;
+        border: 1px dashed gray;
+        margin: 10px 10px;
+        padding: 10px 10px;
+      }
+
+      #demo-controls > * > input,
+      #ui-dialogs > * > input {
+        width: 100%;
+      }
+    </style>
+
     <!-- hab elements -->
     <link rel="import" href="../bower_components/hab-context-menu/hab-context-menu.html">
     <link rel="import" href="../bower_components/hab-editable-label/hab-editable-label.html">
-
-
 
     <!-- demo dependenciees -->
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -19,9 +63,6 @@
     <link rel="import" href="../bower_components/iron-icons/editor-icons.html">
     <link rel="import" href="../bower_components/iron-icons/editor-icons.html">
     <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
-
-    <!-- demo styles -->
-    <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
 
@@ -31,6 +72,7 @@
 
     <div id="contents">
 
+      <h3>demo controls</h3>
       <div id="demo-controls">
         <form data-method="revealPath">
           <input name="path" type="text">
@@ -41,6 +83,30 @@
           <input name="path" type="text">
           <button>openDirectory</button>
         </form>
+      </div>
+
+      <h3>ui dialogs</h3>
+      <div id="ui-dialogs">
+        <div>
+          <h6>alert</h6>
+          <div id="ui-alert"></div>
+        </div>
+        
+
+        <form id="ui-prompt">
+          <h6>prompt</h6>
+          <h2></h2>
+          <input name="response" type="text">
+          <button>submit</button>
+        </form>
+
+        <div id="ui-confirm">
+          <h6>confirm</h6>
+          <h2></h2>
+          <button data-action="ok">ok</button>
+          <button data-action="cancel">cancel</button>
+        </div>
+
       </div>
     </div>
 

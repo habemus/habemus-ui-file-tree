@@ -1,20 +1,23 @@
 // third-party dependencies
 const Bluebird = require('bluebird');
+const Polyglot = require('node-polyglot');
+
 // the UITree Constructor
 const tree = require('../lib');
 
-// the h-dev api
-const hDev = require('./h-dev');
-
-const translations = require('./translations.json');
+const translations = new Polyglot({
+  phrases: require('./translations.json')
+});
 
 // instantiate the tree ui
 var happiness = tree({
-  hDev: hDev,
+  // apis
+  hDev: require('./api/h-dev'),
+  uiDialogs: require('./api/ui-dialogs'),
+  uiNotifications: require('./api/ui-notifications'),
+  
   rootName: 'my-project',
-  translate: function (key) {
-    return translations[key];
-  },
+  translate: translations.t.bind(translations),
 });
 happiness.attach(document.querySelector('#tree-container'));
 // initialize by retrieving root childNodes
@@ -24,7 +27,7 @@ happiness.openDirectory('')
   });
 
 /**
- * Demo control setup
+ * Demo methods control setup
  */
 var demoMethods = {
   revealPath: function (formData) {    
