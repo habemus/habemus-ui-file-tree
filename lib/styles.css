@@ -1,4 +1,14 @@
- /*Prevent the text contents of draggable elements from being selectable. */
+/**
+ * @file-tree-color: #494949;
+ * @file-tree-node-active-color: #6D6D6D;
+ * @file-tree-text-color: #F5F5F5;
+ * 
+ * 
+ * 
+ * 
+ */
+
+/*Prevent the text contents of draggable elements from being selectable. */
 [draggable] {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -21,6 +31,15 @@
   /*opacity: 0;*/
 }
 
+.ht-node.ht-dragging {
+  /**
+   * Only position relative when the node is in dragging mode,
+   * so that the browser may take a screenshot of it.
+   */
+  position: relative;
+  z-index: 10;
+}
+
 .ht-node.ht-exit {
   transform: translateX(-10%);
   opacity: 0;
@@ -37,8 +56,10 @@
   right: 0;
 
   /* height must match the icon's height */
-  height: 20px;
-  background-color: #aaa;
+  height: 24px;
+  
+  /* @tree-node-active-color: #6D6D6D; */
+  background-color: #6D6D6D;
   z-index: 0;
 }
 
@@ -54,7 +75,10 @@ li.ht-node {
   list-style: none;
   padding-top: 0;
   padding-bottom: 0;
-  padding-left: 15px;
+  /**
+   * Must be the same size as: chevron-icon-width + chevron-icon-margin-right
+   */
+  padding-left: 20px;
   padding-right: 0;
 
   margin-top: 0;
@@ -81,8 +105,8 @@ li.ht-node {
    * for drag and drop interactions
    */
   pointer-events: none;
-
-  font-size: 13px;
+  font-size: 12px;
+  height: 24px;
 
   /* align stuff */
   display: flex;
@@ -96,8 +120,8 @@ li.ht-node {
 }
 
 .ht-label iron-icon {
-  height: 20px;
-  width: 20px;
+  height: 18px;
+  width: 18px;
 
   /* prevent icon from shrinking */
   flex-shrink: 0;
@@ -113,21 +137,24 @@ li.ht-node {
 .ht-branch-label {
   /*border-bottom: 1px solid gray;*/
 
-  /* make the branch collapse */
+  /* make the branch collapse
   display: inline-block;
+  */
+  
 }
-
+/* 
 .ht-branch-label:hover {
   background-color: lightgray;
-}
+} */
 
 .ht-branch-label iron-icon[icon="chevron-right"] {
   /* rotate chevron 90 deg so that chevron right is pointing down */
   transform: rotateZ(90deg);
+  margin-right: 2px;
 }
 
 .ht-branch-label iron-icon[icon="folder"] {
-  margin-right: 5px;
+  margin-right: 4px;
 }
 
 .ht-branch.ht-collapsed [data-role="branch-child-container"] {
@@ -185,7 +212,7 @@ li.ht-node {
    * aligns correctly with branch icons
    */
   margin-left: 20px;
-  margin-right: 5px;
+  margin-right: 4px;
 }
 
 .ht-leaf-label:hover {
