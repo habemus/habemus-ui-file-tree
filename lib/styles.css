@@ -3,6 +3,10 @@
  * @file-tree-node-active-color: #6D6D6D;
  * @file-tree-text-color: #F5F5F5;
  * 
+ * @habemus-light-green: #3EEEB7;
+ * @habemus-dark-green: #0ADDA6;
+ * @file-tree-dragging-color: @habemus-dark-green;
+ * 
  * 
  * 
  * 
@@ -150,6 +154,7 @@ li.ht-node {
 .ht-branch-label iron-icon[icon="chevron-right"] {
   /* rotate chevron 90 deg so that chevron right is pointing down */
   transform: rotateZ(90deg);
+  transition: transform .05s linear;
   margin-right: 2px;
 }
 
@@ -179,20 +184,20 @@ li.ht-node {
 
 /* dragging behavior */
 .ht-branch.ht-dragging > [data-role="branch-label"] {
-  background-color: darkred;
+  background-color: #0ADDA6;
   opacity: 0.8;
   color: white;
 }
 
 .ht-branch.ht-dragover > [data-role="branch-label"],
 .ht-root.ht-dragover > [data-role="branch-label"] {
-  background-color: black;
+  background-color: #5B5B5B;
   color: white;
 }
 
 .ht-branch.ht-dragover > [data-role="branch-child-container"],
 .ht-root.ht-dragover > [data-role="branch-child-container"] {
-  background-color: black;
+  background-color: #5B5B5B;
   color: white;
 }
 
@@ -221,8 +226,8 @@ li.ht-node {
 
 /* dragging behavior */
 .ht-leaf.ht-dragging .ht-leaf-label {
-  background-color: darkred;
-  opacity: 0.8;
-  color: white;
+  background-color: #0ADDA6;
+  opacity: 1;
+  color: #3C3C3C !important;
 }
 /* leaf
