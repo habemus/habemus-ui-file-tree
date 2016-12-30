@@ -65,6 +65,9 @@
   /* @tree-node-active-color: #6D6D6D; */
   background-color: #6D6D6D;
   z-index: 0;
+
+  /* non-interactable */
+  pointer-events: none;
 }
 
 li.ht-node {
