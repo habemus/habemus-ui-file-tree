@@ -15,11 +15,10 @@
     "gulp-find": "0.0.10",
     "gulp-istanbul": "^1.0.0",
     "gulp-mocha": "^2.2.0",
+    "gulp-prepare-translations": "^1.0.0",
     "h-fs": "git+ssh://git@bitbucket.org/habemus-tutti/h-fs.git",
     "node-polyglot": "^2.2.1",
-    "should": "^9.0.2",
-    "through2": "^2.0.3",
-    "vinyl": "^2.0.1"
+    "should": "^9.0.2"
   },
   "dependencies": {
     "bluebird": "^3.4.1",
