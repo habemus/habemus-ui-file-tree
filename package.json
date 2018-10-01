@@ -1,6 +1,6 @@
 {
-  "name": "happiness-tree",
-  "version": "1.0.0-beta",
+  "name": "habemus-ui-file-tree",
+  "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
