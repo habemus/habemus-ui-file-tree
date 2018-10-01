@@ -1,13 +1,13 @@
 {
-  "name": "happiness-tree",
-  "version": "1.0.0-beta",
+  "name": "habemus-ui-file-tree",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "authors": [
     "Simon <simonxd@gmail.com>"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/habemus/happiness-tree",
+  "homepage": "https://github.com/habemus/habemus-ui-file-tree",
   "moduleType": [],
   "ignore": [
     "**/.*",
